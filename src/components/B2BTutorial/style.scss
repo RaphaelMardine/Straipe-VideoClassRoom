@@ -1,13 +1,7 @@
-.HeaderFakeExcluir {
-    width: 1330px;
-    height: 64px;
-    background-color: #FFFFFF;
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid #CCC;
-}
+// eslint-disable-file no-use-before-define 
 
 .B2BContainer {
-    padding: 24px;
+    padding: 1.5rem;
     background: #F8F8F8;
     .Flex {
         display: flex;
@@ -17,84 +11,94 @@
         flex-direction: column;
     }
     .B2BContainerSwitch {
-        position: absolute;
-        top: 113px;
+        padding: 1.5rem;
         display: flex;
         align-items: center;
+        justify-content: space-around;
         span {
-            font-size: 12px;
+            font-size: 0.75rem;
             font-weight: 400;
             color: #727578;
         }
     }
     .B2BContentContainer {
         border: 1px solid #FFF;
-        border-radius: 4px;
+        border-radius: 0.25rem;
         box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
         background: #FFFFFF;
-        padding-left: 24px;
-        padding-bottom: 40px;
+        padding-left: 1.5rem;
+        padding-bottom: 2.5rem;
         .B2BContentDescription {
             h1 {
-                font-size: 16px;
+                font-size: 1rem;
                 font-weight: 600;
                 text-transform: uppercase;
                 color: #273472;
             }
             p { 
-                font-size: 12px;
+                font-size: 0.75rem;
                 color: #24262b;
                 font-weight: 400;
                 max-width: 65%;
-                padding-bottom: 24px;
+                padding-bottom: 1.5rem;
             }
         }
     }
-    .B2BPlayerContent {
-        width: 65%;
-    }
+
     .B2BContainerContentModule {
-        width: 18.75rem;
-        height: 470px;
+        padding: 15px;
+        height: 30rem;
         overflow-x: scroll;
         .B2BContentModule {
           border-top: 1px solid rgba(140, 140, 140, 0.2);
-          padding: 8px;
+          padding: 0.5rem;
         //   width: 90%;
           list-style-type: none;
         //   height: 3.375rem;
             .B2BContentModuleName {
-                font-size: 12px;
+                display: flex;
+                justify-content: space-between;
+                font-size: 0.75rem;
                 font-weight: 400;
                 color: #727578;
-                margin-left: 8px;
+                margin-left: 0.5rem;
             }
             .B2BContentModuleTitle {
-                font-size: 16px;
+                font-size: 1rem;
                 color: #24262B;
-                margin-left: 8px;
+                margin-left: 0.5rem;
             }
         }
     }
     .B2BSearchModule {
+      margin-left: 1.5rem;
+      position: relative;
+      max-width: 20.5rem;
         input {
+            width: 100%;
             border: none;
             border-bottom: 1px solid #24262B;
-            padding-bottom: 10px;
-            width: 300px;
+            padding-bottom: 0.625rem;
+            background-color: transparent;
         }
         input::placeholder {
             color: #BDBDBD;
-            font-size: 16px;
+            font-size: 1rem;
             font-weight: 300;
+        }
+        img {
+          position: absolute;
+          top: 5px;
+          right: 0;
+
         }
     }
     .switch {
         position: relative;
         display: inline-block;
-        width: 34px;
-        height: 14px;
-        margin-right: 20px;
+        width: 2.125rem;
+        height: 0.875rem;
+        margin-right: 1.25rem;
       }
       
       /* Hide default HTML checkbox */
@@ -118,8 +122,8 @@
       .slider:before {
         position: absolute;
         content: "";
-        height: 20px;
-        width: 20px;
+        height: 1.25rem;
+        width: 1.25rem;
         bottom: -2px;
         background: #273472;
         -webkit-transition: .4s;
@@ -142,7 +146,7 @@
       
       /* Rounded sliders */
       .slider.round {
-        border-radius: 34px;
+        border-radius: 2.125rem;
       }
       
       .slider.round:before {
@@ -162,5 +166,26 @@
 
   .B2BContainerModule {
     display: flex;
-    margin-top: 24px;
+    margin-top: 1.5rem;
+  }
+  .ContentSelected {
+    background-color: #F4F7FA;
+    p {
+      color: #EE4978;
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 400;
+    }
+  }
+  .selected {
+    color: #273472;
+    font-size: 16px;
+  }
+  .B2BRightContent {
+    max-width: 55rem;
+  }
+  .B2BLeftContent {
+    max-width: 21rem;
+    width: 100%;
+    padding: 21px;
   }

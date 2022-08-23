@@ -1,4 +1,5 @@
 import { B2BTutorialClass } from "./components/B2BTutorial/index"
+import React from 'react'
 
 function App() {
   return (
