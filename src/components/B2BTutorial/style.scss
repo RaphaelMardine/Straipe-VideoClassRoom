@@ -5,16 +5,20 @@
     background: #F8F8F8;
     .Flex {
         display: flex;
+        justify-content: space-between;
+        @media(max-width:770px) {
+           display: block;
+        }
     }
     .FlexColumn {
         display: flex;
         flex-direction: column;
     }
     .B2BContainerSwitch {
-        padding: 1.5rem;
+      padding: 0rem 0rem 1.5rem 0rem;
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        margin-left: 24px;
         span {
             font-size: 0.75rem;
             font-weight: 400;
@@ -28,6 +32,15 @@
         background: #FFFFFF;
         padding-left: 1.5rem;
         padding-bottom: 2.5rem;
+        max-width: 1260px;
+        margin: 0 auto;
+        @media(max-width: 770px) {
+          padding-right: 1.5rem;
+        }
+        @media(max-width: 370px) {
+          padding-right: 0px;
+          padding-left: 0px;
+        }
         .B2BContentDescription {
             h1 {
                 font-size: 1rem;
@@ -39,8 +52,19 @@
                 font-size: 0.75rem;
                 color: #24262b;
                 font-weight: 400;
-                max-width: 65%;
                 padding-bottom: 1.5rem;
+            }
+            .B2BContainerHeader {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              width: 95%;
+              img {
+                display: none;
+                  @media(max-width: 770px) {
+                    display: block;
+                  }
+              }
             }
         }
     }
@@ -54,6 +78,7 @@
           padding: 0.5rem;
         //   width: 90%;
           list-style-type: none;
+
         //   height: 3.375rem;
             .B2BContentModuleName {
                 display: flex;
@@ -68,6 +93,9 @@
                 color: #24262B;
                 margin-left: 0.5rem;
             }
+        }
+        p {
+          cursor: pointer;
         }
     }
     .B2BSearchModule {
@@ -98,7 +126,7 @@
         display: inline-block;
         width: 2.125rem;
         height: 0.875rem;
-        margin-right: 1.25rem;
+        margin-right: 0.5rem;
       }
       
       /* Hide default HTML checkbox */
@@ -169,12 +197,13 @@
     margin-top: 1.5rem;
   }
   .ContentSelected {
-    background-color: #F4F7FA;
     p {
       color: #EE4978;
       font-size: 12px;
       line-height: 16px;
       font-weight: 400;
+      margin-left: 0.5rem;
+      margin-top: 8px
     }
   }
   .selected {
@@ -182,10 +211,72 @@
     font-size: 16px;
   }
   .B2BRightContent {
-    max-width: 55rem;
+    width: 100%;
   }
   .B2BLeftContent {
     max-width: 21rem;
     width: 100%;
     padding: 21px;
+    @media(max-width: 770px) {
+      max-width: none;
+      width: auto;
+      margin-top: 20px;
+      .B2BContainerSpan {
+        img {
+          display: none;
+        }
+      }
+      .B2BSearchModule {
+        max-width: none;
+        margin-left: 0px;
+      }
+      .B2BContainerSwitch {
+        margin-left: 0px;
+      }
+      .B2BContainerContentModule  {
+        height: 15rem;
+      }
+    }
+  }
+  .B2BContainerSpan {
+    margin-left: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+    align-items: center;
+  }
+  .ContainerSelected {
+    .B2BContentModuleTitle {
+      color: #273472!important;
+      font-weight: 300;
+    }
+    .B2BContainerContentReference {
+      background-color: #F4F7FA;
+      padding-right: 10px;
+      width: 100%;
+    }
+  }
+  .B2BAccordionContentSelected {
+    display: flex;
+    justify-content: space-between;
+    p:nth-child(2) { 
+      color: #727578
+    }
+  }
+  .loader {
+
+    width: 14px;
+    height: 14px;
+    border: 4px solid #96BBF5;
+    border-left-color: #c9d6c9;
+    border-radius: 100%;
+    animation: loader 1s linear infinite;
+  }
+
+  @keyframes loader {
+
+    to {
+  
+      transform: rotate(360deg);
+    }
   }
