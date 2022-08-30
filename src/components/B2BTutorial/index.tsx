@@ -5,110 +5,18 @@ import "./style.scss";
 import closeIcon from "./icon/closeIcon.svg";
 import searchIcon from "./icon/searchIcon.svg";
 import { useEffect, useState, createContext } from "react";
+import { B2BTutorial, Daum } from "./types";
 
-export interface B2BTutorial {
-  valueSearch?: Daum[];
-  value?: any;
-  search?: boolean;
-  responseVideobyId?: any;
-  responseCMSbyId?: any;
-  setId?: any;
-  setIdVideo?: any;
-  data: Daum[];
-  dataB?: any;
-  meta?: Meta;
-  isLoading?: any;
-}
+const VideoContext = createContext<B2BTutorial>({} as B2BTutorial);
 
-export interface Daum {
-  id: number;
-  attributes: Attributes;
-}
-
-export interface Attributes {
-  title: string;
-  description: string;
-  video_duration: string;
-  index: number;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  checkout_module: CheckoutModule;
-  video: Video;
-}
-
-export interface CheckoutModule {
-  data: Data;
-}
-
-export interface Data {
-  id: number;
-  attributes: Attributes2;
-}
-
-export interface Attributes2 {
-  title: string;
-  description: string;
-  index: number;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-}
-
-export interface Video {
-  data: Data2;
-}
-
-export interface Data2 {
-  id: number;
-  attributes: Attributes3;
-}
-
-export interface Attributes3 {
-  name: string;
-  alternativeText: string;
-  caption: string;
-  width: any;
-  height: any;
-  formats: any;
-  hash: string;
-  ext: string;
-  mime: string;
-  size: number;
-  url: string;
-  previewUrl: any;
-  provider: string;
-  provider_metadata: any;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface Meta {
-  pagination: Pagination;
-}
-
-export interface Pagination {
-  page: number;
-  pageSize: number;
-  pageCount: number;
-  total: number;
-}
-
-const VideoContext = createContext(null);
-
-const B2BLeftContent = ({ data, dataB }: B2BTutorial) => {
+const B2BLeftContent = () => {
   const [search, setSearch] = useState(false);
   const [value, setValue] = useState("");
   return (
     <section className="B2BLeftContent">
       <Switch />
       <Search setSearch={setSearch} value={value} setValue={setValue} />
-      <ModuleAccordion
-        data={data}
-        dataB={dataB}
-        search={search}
-        value={value}
-      />
+      <ModuleAccordion search={search} value={value} />
     </section>
   );
 };
@@ -125,7 +33,6 @@ const B2BRightContent = ({ dataB }: B2BTutorial) => {
 };
 
 const Switch = () => {
-  //@ts-ignore
   const { setSwitchOn, switchOn } = useContext(VideoContext);
   return (
     <div className="B2BContainerSwitch">
@@ -160,149 +67,135 @@ const Search = ({ setSearch, value, setValue }: any) => {
           setValue(e.target.value);
         }}
       />
-      <img alt="Search Module" src={searchIcon}></img>
+      <img alt="Search Module" src={searchIcon} />
     </form>
   );
 };
 
 const AccordionListSearch = ({ valueSearch, isLoading }: any) => {
-  //@ts-ignore
-  const { setIdVideo, setId, id, idVideo } = useContext(VideoContext);
+  const { setIdVideo, setId } = useContext(VideoContext);
   const [accordionId, setAccordionId] = useState(1);
   const [selected, setSelected] = useState("ContainerSelected");
   return (
     <>
-      {
-        //@ts-ignore
-        valueSearch?.data?.map((item: Daum) => {
-          return (
-            <li className={`B2BContentModule   ${selected}`}>
-              <div className="B2BContainerContentReference">
-                <li
-                  className="B2BContentModuleName"
-                  onClick={() => {
-                    setAccordionId(item?.id);
-                    setSelected("ContainerSelected");
-                    setId(item?.id);
-                  }}
-                  key={item?.id}
-                >
-                  <p>Módulo</p>
-                </li>
-                <p className="B2BContentModuleTitle">
-                  {item?.attributes?.checkout_module?.data?.attributes?.title}
-                </p>
-              </div>
-              {/* {accordionId === item.id && ( */}
+      {valueSearch?.data?.map((item: Daum) => {
+        return (
+          <li className={`B2BContentModule   ${selected}`}>
+            <div className="B2BContainerContentReference">
               <li
-                className="B2BAccordionContent ContentSelected"
+                className="B2BContentModuleName"
+                onClick={() => {
+                  setAccordionId(item?.id);
+                  setSelected("ContainerSelected");
+                  setId(item?.id);
+                }}
                 key={item?.id}
               >
-                {/* {valueSearch?.attributes?.video?.map((row: any) => { */}
-                {/* return ( */}
-                <li className="B2BAccordionContentSelected">
-                  {" "}
-                  {!isLoading ? (
-                    <p
-                      onClick={() => {
-                        setIdVideo(item?.id);
-                      }}
-                    >
-                      {item?.attributes?.title}
-                    </p>
-                  ) : (
-                    ""
-                  )}{" "}
-                  {/* {!isLoading ? (
+                <p>Módulo</p>
+              </li>
+              <p className="B2BContentModuleTitle">
+                {item?.attributes?.checkout_module?.data?.attributes?.title}
+              </p>
+            </div>
+            {/* {accordionId === item.id && ( */}
+            <li className="B2BAccordionContent ContentSelected" key={item?.id}>
+              {/* {valueSearch?.attributes?.video?.map((row: any) => { */}
+              {/* return ( */}
+              <li className="B2BAccordionContentSelected">
+                {" "}
+                {!isLoading ? (
+                  <p
+                    onClick={() => {
+                      setIdVideo(item?.id);
+                    }}
+                  >
+                    {item?.attributes?.title}
+                  </p>
+                ) : (
+                  ""
+                )}{" "}
+                {/* {!isLoading ? (
                       // <p>{row?.attributes?.video_duration}</p>
                       ) : (
                         "aaa"
                       )} */}
-                </li>
-                {/* ); */}
-                {/* // })} */}
               </li>
-              {/* )} */}
+              {/* ); */}
+              {/* // })} */}
             </li>
-          );
-        })
-      }
+            {/* )} */}
+          </li>
+        );
+      })}
     </>
   );
 };
 
-const AccordionListDefault = ({ data, dataB }: B2BTutorial) => {
-  //@ts-ignore
-  const { setIdVideo, setId, isLoading, id, idVideo } =
+const AccordionListDefault = () => {
+  const { setIdVideo, setId, isLoading, responseCMSbyId, responseCMS } =
     useContext(VideoContext);
   const [accordionId, setAccordionId] = useState(1);
   const [selected, setSelected] = useState("ContainerSelected");
   return (
     <>
-      {
-        //@ts-ignore
-        data?.data?.map((item: Daum) => {
-          return (
-            <li
-              className={`B2BContentModule   ${
-                accordionId === item.id && selected
-              }`}
-            >
-              <div className="B2BContainerContentReference">
-                <li
-                  className="B2BContentModuleName"
-                  onClick={() => {
-                    setAccordionId(item.id);
-                    setSelected("ContainerSelected");
-                    setId(item.id);
-                  }}
-                  key={item.id}
-                >
-                  <p>Módulo</p>
-                </li>
-                <p className="B2BContentModuleTitle">{item.attributes.title}</p>
-              </div>
-              {accordionId === item.id && (
-                <li
-                  className="B2BAccordionContent ContentSelected"
-                  key={item.id}
-                >
-                  {dataB?.data?.attributes?.checkout_videos?.data?.map(
-                    (row: any) => {
-                      return (
-                        <li className="B2BAccordionContentSelected">
-                          {" "}
-                          {!isLoading ? (
-                            <p
-                              onClick={() => {
-                                setIdVideo(row?.id);
-                              }}
-                            >
-                              {row?.attributes?.title}
-                            </p>
-                          ) : (
-                            ""
-                          )}{" "}
-                          {!isLoading ? (
-                            <p>{row.attributes.video_duration}</p>
-                          ) : (
-                            ""
-                          )}
-                        </li>
-                      );
-                    }
-                  )}
-                </li>
-              )}
-            </li>
-          );
-        })
-      }
+      {responseCMS?.data?.map((item: Daum) => {
+        return (
+          <li
+            className={`B2BContentModule   ${
+              accordionId === item.id && selected
+            }`}
+          >
+            <div className="B2BContainerContentReference">
+              <li
+                className="B2BContentModuleName"
+                onClick={() => {
+                  setAccordionId(item.id);
+                  setSelected("ContainerSelected");
+                  setId(item.id);
+                }}
+                key={item.id}
+              >
+                <p>Módulo</p>
+              </li>
+              <p className="B2BContentModuleTitle">{item.attributes.title}</p>
+            </div>
+            {accordionId === item.id && (
+              <li className="B2BAccordionContent ContentSelected" key={item.id}>
+                {responseCMSbyId?.data?.attributes?.checkout_videos?.data?.map(
+                  (row: any) => {
+                    return (
+                      <li className="B2BAccordionContentSelected">
+                        {" "}
+                        {!isLoading ? (
+                          <p
+                            onClick={() => {
+                              setIdVideo(row?.id);
+                            }}
+                          >
+                            {row?.attributes?.title}
+                          </p>
+                        ) : (
+                          ""
+                        )}{" "}
+                        {!isLoading ? (
+                          <p>{row.attributes.video_duration}</p>
+                        ) : (
+                          ""
+                        )}
+                      </li>
+                    );
+                  }
+                )}
+              </li>
+            )}
+          </li>
+        );
+      })}
     </>
   );
 };
 
-const ModuleAccordion = ({ data, dataB, search, value }: B2BTutorial) => {
+const ModuleAccordion = ({ search, value }: B2BTutorial) => {
   const [valueSearch, setValueSearch] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   var myHeaders = new Headers();
@@ -334,7 +227,7 @@ const ModuleAccordion = ({ data, dataB, search, value }: B2BTutorial) => {
       {search ? (
         <AccordionListSearch valueSearch={valueSearch} isLoading={isLoading} />
       ) : (
-        <AccordionListDefault data={data} dataB={dataB} />
+        <AccordionListDefault />
       )}
     </ul>
   );
@@ -361,7 +254,6 @@ const ContentDescription = ({ responseVideobyId }: any) => {
 const PlayerVideo = ({ responseVideobyId }: any) => {
   const [timeEnd, setTimeEnd] = useState(true);
   const player = useRef<HTMLVmPlayerElement>(null);
-  //@ts-ignore
   const { responseCMSbyId, idVideo, setIdVideo, switchOn } =
     useContext(VideoContext);
   const [currentTime] = usePlayerContext(player, "currentTime", 0);
@@ -380,7 +272,6 @@ const PlayerVideo = ({ responseVideobyId }: any) => {
   };
 
   useEffect(() => {
-    //@ts-ignore
     currentTime === player?.current?.duration && switchOn
       ? onPlaybackReady()
       : setTimeEnd(false);
@@ -391,7 +282,6 @@ const PlayerVideo = ({ responseVideobyId }: any) => {
       ? `${responseVideobyId?.data?.attributes?.video?.data?.attributes?.url}`
       : "";
   return (
-    //@ts-ignore
     <Player
       loop={false}
       controls={false}
@@ -488,9 +378,7 @@ export const B2BTutorialClass = (query: any) => {
       <div className="B2BContainer">
         <div className="B2BContentContainer">
           <div className="Flex">
-            {/*@ts-ignore */}
             <VideoContext.Provider
-              //@ts-ignore
               value={{
                 setSwitchOn,
                 switchOn,
@@ -500,10 +388,11 @@ export const B2BTutorialClass = (query: any) => {
                 id,
                 idVideo,
                 responseCMSbyId,
+                responseCMS,
               }}
             >
               <B2BRightContent data={responseCMS} dataB={responseVideobyId} />
-              <B2BLeftContent data={responseCMS} dataB={responseCMSbyId} />
+              <B2BLeftContent />
             </VideoContext.Provider>
           </div>
         </div>
