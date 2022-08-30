@@ -2,8 +2,8 @@
 import React, { useContext, useRef } from "react";
 import { DefaultUi, Player, Video, usePlayerContext } from "@vime/react";
 import "./style.scss";
-import closeIcon from "../icon/closeIcon.svg";
-import searchIcon from "../icon/searchIcon.svg";
+import closeIcon from "./icon/closeIcon.svg";
+import searchIcon from "./icon/searchIcon.svg";
 import { useEffect, useState, createContext } from "react";
 
 export interface B2BTutorial {
