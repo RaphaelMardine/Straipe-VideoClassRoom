@@ -43,7 +43,7 @@ const Switch = () => {
       <div className="B2BContainerSpan">
         <span>Reprodução automática</span>
         <img
-          src={closeIcon}
+          src="https://img.icons8.com/material-outlined/24/000000/delete-sign.png"
           alt="Close content"
           onClick={() => {
             alert("Sai daqui, não terminei essa feature!");
@@ -67,7 +67,10 @@ const Search = ({ setSearch, value, setValue }: any) => {
           setValue(e.target.value);
         }}
       />
-      <img alt="Search Module" src={searchIcon} />
+      <img
+        alt="Search Module"
+        src="https://img.icons8.com/ios-glyphs/30/1A1A1A/search--v1.png"
+      />
     </form>
   );
 };
@@ -239,7 +242,7 @@ const ContentDescription = ({ responseVideobyId }: any) => {
       <div className="B2BContainerHeader">
         <h1>{responseVideobyId?.data?.attributes?.title}</h1>
         <img
-          src={closeIcon}
+          src="https://img.icons8.com/material-outlined/24/000000/delete-sign.png"
           alt="Close content"
           onClick={() => {
             alert("Sai daqui, não terminei essa feature!");
@@ -391,7 +394,7 @@ export const B2BTutorialClass = (query: any) => {
                 responseCMS,
               }}
             >
-              <B2BRightContent data={responseCMS} dataB={responseVideobyId} />
+              <B2BRightContent dataB={responseVideobyId} />
               <B2BLeftContent />
             </VideoContext.Provider>
           </div>
