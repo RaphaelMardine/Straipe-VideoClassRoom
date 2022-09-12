@@ -2,8 +2,6 @@
 import React, { useContext, useRef } from "react";
 import { DefaultUi, Player, Video, usePlayerContext } from "@vime/react";
 import "./style.scss";
-import closeIcon from "./icon/closeIcon.svg";
-import searchIcon from "./icon/searchIcon.svg";
 import { useEffect, useState, createContext } from "react";
 import { B2BTutorial, Daum } from "./types";
 
@@ -21,12 +19,12 @@ const B2BLeftContent = () => {
   );
 };
 
-const B2BRightContent = ({ dataB }: B2BTutorial) => {
+const B2BRightContent = ({ responseVideobyId }: B2BTutorial) => {
   return (
     <section className="B2BRightContent">
-      <ContentDescription responseVideobyId={dataB} />
+      <ContentDescription responseVideobyId={responseVideobyId} />
       <div className="B2BPlayerContent">
-        <PlayerVideo responseVideobyId={dataB} />
+        <PlayerVideo responseVideobyId={responseVideobyId} />
       </div>
     </section>
   );
@@ -338,7 +336,6 @@ export const B2BTutorialClass = (query: any) => {
   const [responseVideobyId, setResponseVideobyId] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [switchOn, setSwitchOn] = useState(true);
-  let isPageWide = useMediaQuery("(max-width: 880px)");
 
   var myHeaders = new Headers();
   myHeaders.append(
@@ -394,7 +391,7 @@ export const B2BTutorialClass = (query: any) => {
                 responseCMS,
               }}
             >
-              <B2BRightContent dataB={responseVideobyId} />
+              <B2BRightContent responseVideobyId={responseVideobyId} />
               <B2BLeftContent />
             </VideoContext.Provider>
           </div>
