@@ -1,4 +1,6 @@
 export interface B2BTutorial {
+    module?: string;
+    setOpen?: any;
     valueSearch?: Daum[];
     idVideo?: number;
     switchOn?: Boolean;

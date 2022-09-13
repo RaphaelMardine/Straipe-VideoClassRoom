@@ -31,7 +31,7 @@ const B2BRightContent = ({ responseVideobyId }: B2BTutorial) => {
 };
 
 const Switch = () => {
-  const { setSwitchOn, switchOn } = useContext(VideoContext);
+  const { setSwitchOn, switchOn, setOpen } = useContext(VideoContext);
   return (
     <div className="B2BContainerSwitch">
       <label className="switch">
@@ -44,7 +44,7 @@ const Switch = () => {
           src="https://img.icons8.com/material-outlined/24/000000/delete-sign.png"
           alt="Close content"
           onClick={() => {
-            alert("Sai daqui, não terminei essa feature!");
+            setOpen(false);
           }}
         />
       </div>
@@ -235,6 +235,7 @@ const ModuleAccordion = ({ search, value }: B2BTutorial) => {
 };
 
 const ContentDescription = ({ responseVideobyId }: any) => {
+  const { setOpen } = useContext(VideoContext);
   return (
     <div className="B2BContentDescription">
       <div className="B2BContainerHeader">
@@ -243,7 +244,7 @@ const ContentDescription = ({ responseVideobyId }: any) => {
           src="https://img.icons8.com/material-outlined/24/000000/delete-sign.png"
           alt="Close content"
           onClick={() => {
-            alert("Sai daqui, não terminei essa feature!");
+            setOpen(false);
           }}
         />
       </div>
@@ -328,7 +329,8 @@ function useMediaQuery(query: any) {
   return matches;
 }
 
-export const B2BTutorialClass = (query: any) => {
+export const B2BTutorialClass = ({ setOpen, module }: B2BTutorial) => {
+  module = "checkout-modules";
   const [responseCMS, setResponseCMS] = useState([]);
   const [id, setId] = useState(1);
   const [idVideo, setIdVideo] = useState(1);
@@ -349,10 +351,7 @@ export const B2BTutorialClass = (query: any) => {
   };
 
   useEffect(() => {
-    fetch(
-      "http://localhost:1337/api/checkout-modules?sort=[1]=index",
-      requestOptions
-    )
+    fetch(`http://localhost:1337/api/${module}?sort=[1]=index`, requestOptions)
       .then((response) => response.json())
       .then((data) => setResponseCMS(data));
   }, []);
@@ -380,6 +379,8 @@ export const B2BTutorialClass = (query: any) => {
           <div className="Flex">
             <VideoContext.Provider
               value={{
+                module,
+                setOpen,
                 setSwitchOn,
                 switchOn,
                 setId,
